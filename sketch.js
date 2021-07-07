@@ -43,12 +43,14 @@ function setup() {
   //top
   block16 = new Block(390,155,30,40);
 
-  slingshot = new SlingShot(polygon.body,{x:200, y:50});
-   
-  polygon= new Polygon(50,200,20)
-  polygon.addImage(polygon_img)
-
   
+   
+  //polygon= new Polygon(50,200,20)
+  polygon=Bodies.circle(50,200,20)
+  World.add(world,polygon)
+  
+
+  slingShot = new Sling_Shot(this.polygon,{x:100, y:200});
 
 }
 function draw() {
@@ -57,16 +59,6 @@ function draw() {
   textSize(20);
   fill("lightyellow");
   
-
-  function mouseDragged(){
-    Matter.Body.setPosition(polygon.body, {x: mouseX , y: mouseY});
-}
-
-
-function mouseReleased(){
-    slingshot.fly();
-}
-
   ground.display();
   stand1.display();
   
@@ -92,7 +84,25 @@ function mouseReleased(){
   block15.display();
   fill("grey");
   block16.display();
-  polygon.display();
+  slingShot.display();
+  
  
 
+imageMode(CENTER);
+
+image(polygon_img,  polygon.position.x, polygon.position.y,40,40);
 }
+
+  function mouseDragged()
+  {
+    Matter.Body.setPosition(this.polygon, {x: mouseX , y: mouseY});
+  }
+
+
+function mouseReleased()
+{
+    slingShot.fly();
+}
+
+  
+
